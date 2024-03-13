@@ -1,9 +1,14 @@
-import Image from "next/image";
+import * as React from "react";
 
-export default function Home() {
+export interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <div>
-      Home
-    </div>
+    // <React.Suspense
+    //   fallback={<DataTableSkeleton columnCount={4} filterableColumnCount={2} />}
+    // ></React.Suspense>
+    <div></div>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/config/site";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -9,8 +10,12 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "demo dra",
-  description: "Demo DRA created",
+  title: siteConfig.name,
+  description: siteConfig.description,
+  authors: [{
+    name: "Ryan Phoen",
+    url: "https://ryanphoen.com",
+  }]
 };
 
 export default function RootLayout({
