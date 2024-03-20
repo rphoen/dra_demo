@@ -20,7 +20,9 @@ export type Request = {
   id: string;
   request: string;
   status: "pending" | "accepted" | "rejected";
-  title: string;
+  intention: string;
+  duration: string;
+  datacontrol: "masked" | "clear";
 };
 
 export const columns: ColumnDef<Request>[] = [
@@ -29,8 +31,16 @@ export const columns: ColumnDef<Request>[] = [
     header: "Request",
   },
   {
-    accessorKey: "title",
-    header: "Title",
+    accessorKey: "intention",
+    header: "Intention",
+  },
+  {
+    accessorKey: "duration",
+    header: "Duration",
+  },
+  {
+    accessorKey: "datacontrol",
+    header: "Data Control",
   },
   {
     accessorKey: "status",

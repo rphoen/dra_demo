@@ -1,0 +1,23 @@
+[
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@example.com",
+      "password": "admin",
+      "roles": ["Admin", "Data Owner"]
+    },
+    {
+      "id": 2,
+      "username": "Jane",
+      "email": "jane@example.com",
+      "password": "password456",
+      "roles": ["Data Requestor", "Reviewer"]
+    },
+    {
+      "id": 3,
+      "username": "Bob",
+      "email": "bob@example.com",
+      "password": "password789",
+      "roles": ["Data Owner"]
+    }
+  ]

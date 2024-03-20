@@ -1,0 +1,26 @@
+[
+    {
+      "id": "1",
+      "request": "Client data",
+      "intention": "Requesting for client data...",
+      "duration": "2 days",
+      "datacontrol": "Clear",
+      "status": "pending"
+    },
+    {
+      "id": "2",
+      "request": "API access",
+      "intention": "I need API access",
+      "duration": "2 days",
+      "datacontrol": "Masked",
+      "status": "pending"
+    },
+    {
+      "id": "3",
+      "request": "Client data",
+      "intention": "Requesting for client data...",
+      "duration": "1 day",
+      "datacontrol": "Clear",
+      "status": "Rejected"
+    }
+  ]
