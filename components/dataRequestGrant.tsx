@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
@@ -24,7 +26,7 @@ export function DataRequestGrant() {
     <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Grant Data Request</CardTitle>
-        <CardDescription>You are granting request for *placeholder*</CardDescription>
+        <CardDescription>Granting request for *placeholder*</CardDescription>
       </CardHeader>
       <CardContent>
         <form>

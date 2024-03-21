@@ -1,6 +1,7 @@
-import * as React from "react"
+"use client";
 
-import { Button } from "@/components/ui/button"
+import * as React from "react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,18 +9,72 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "./ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
+import e from "cors";
+
+interface FormData {
+  id: string;
+  request: string;
+  intention: string;
+  duration: string;
+  datacontrol: string;
+  status: string;
+}
 
 export function DataRequestForm() {
+  const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
+  const [formData, setFormData] = React.useState<FormData>({
+    id: "",
+    request: "",
+    intention: "",
+    duration: "",
+    datacontrol: "",
+    status: "Pending",
+  });
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const response = await fetch("/api/requests", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    setIsLoading(false);
+    if (response.ok) {
+      setIsSubmitted(true);
+      setFormData({
+        id: "",
+        request: "",
+        intention: "",
+        duration: "",
+        datacontrol: "",
+        status: "Pending",
+      });
+    } else {
+      return console.error("Failed to save data request");
+    }
+    // router.refresh();
+  }
+
   return (
     <Card className="w-[350px]">
       <CardHeader>
@@ -27,39 +82,63 @@ export function DataRequestForm() {
         <CardDescription>Choose the data to request</CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="Access">Access Mode</Label>
-              <Input id="access" placeholder="Access Mode" />
+              <Label htmlFor="request">Access Mode</Label>
+              <Input
+                id="request"
+                name="request"
+                value={formData.request}
+                placeholder="Access Mode"
+                onChange={handleChange}
+              />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="intention">Intention</Label>
-              <Input id="intention" placeholder="Intention" />
+              <Input
+                id="intention"
+                name="intention"
+                placeholder="Intention"
+                value={formData.intention}
+                onChange={handleChange}
+              />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="duration">Duration</Label>
-              <Input id="duration" placeholder="Duration" />
+              <Input
+                id="duration"
+                name="duration"
+                placeholder="Duration"
+                value={formData.duration}
+                onChange={handleChange}
+              />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="datacontrol">Data Control</Label>
-              <Select>
-                <SelectTrigger id="datacontrol">
+              <Select
+                name="datacontrol"
+                value={formData.datacontrol}
+                onValueChange={(value) =>
+                  setFormData({ ...formData, datacontrol: value })
+                }
+              >
+                <SelectTrigger>
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent position="popper">
-                  <SelectItem value="masked">Masked</SelectItem>
-                  <SelectItem value="clear">Clear</SelectItem>
+                  <SelectItem value="Masked">Masked</SelectItem>
+                  <SelectItem value="Clear">Clear</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
+          <div className="flex justify-between py-6">
+            <Button variant="outline">Cancel</Button>
+            <Button type="submit">Submit</Button>
+          </div>
         </form>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline">Cancel</Button>
-        <Button>Submit</Button>
-      </CardFooter>
     </Card>
-  )
+  );
 }
