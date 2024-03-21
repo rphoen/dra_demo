@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import {
   Command,
   CommandDialog,
@@ -12,16 +12,16 @@ import {
 } from "./ui/command";
 import { Button } from "./ui/button";
 import { CommandLoading } from "cmdk";
+import { useRouter } from "next/navigation";
 
 interface Dataset {
   name: string;
   owner: string;
-
 }
 
 export function CommandMenu() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -38,15 +38,15 @@ export function CommandMenu() {
 
   useEffect(() => {
     async function getData() {
-      setLoading(true)
+      setLoading(true);
       const res = await fetch(`/api/sampledata`);
       const data = await res.json();
       setData(data);
-      setLoading(false)
+      setLoading(false);
     }
 
     getData();
-  }, [])
+  }, []);
 
   const handleOpenCommandDialog = () => {
     setOpen(true);
@@ -56,26 +56,29 @@ export function CommandMenu() {
     <div>
       <Button onClick={handleOpenCommandDialog}>Add Request</Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput
-          placeholder="Enter a search..."
-          value={searchQuery}
-          onValueChange={(value) => {
-            setSearchQuery(value);
-          }}
-        />
+        <CommandInput placeholder="Enter a search..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          {loading && <CommandLoading>Fetching data...</CommandLoading>}
-          {data.map((item: any) => {
-            return (
-              <CommandItem key={item.id} value={item}>
-                <div className="flex flex-1 justify-between">
-                  <p> {item.data} </p>
-                  <p> Owner: {item.owner}</p>
-                </div>
-              </CommandItem>
-            )
-          })}
+          <CommandGroup heading="Results">
+            {loading && <CommandLoading>Fetching data...</CommandLoading>}
+            {data.map((item: any) => {
+              return (
+                <CommandItem
+                  key={item.id}
+                  value={item}
+                  onSelect={() => {
+                    router.push(`/dashboard/datarequest/form/${item.id}`);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className="flex flex-1 justify-between">
+                    <p> {item.data} </p>
+                    <p> Owner: {item.owner}</p>
+                  </div>
+                </CommandItem>
+              );
+            })}
+          </CommandGroup>
           {/* <CommandGroup heading="Results">
             <Button onClick={getCatalog}>Fetch Data</Button>
             {data && <pre>{JSON.stringify(data,null,2)}</pre>}

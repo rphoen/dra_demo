@@ -18,6 +18,7 @@ import { DataTableColumnHeader } from "@/components/data-table/data-table-column
 // You can use a Zod schema here if you want.
 export type Request = {
   id: string;
+  dataid: string;
   request: string;
   status: "pending" | "accepted" | "rejected";
   intention: string;

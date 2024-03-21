@@ -20,9 +20,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import e from "cors";
+import { useRouter } from "next/navigation";
 
 interface FormData {
   id: string;
+  dataid: string;
   request: string;
   intention: string;
   duration: string;
@@ -30,10 +32,12 @@ interface FormData {
   status: string;
 }
 
-export function DataRequestForm() {
+export function DataRequestForm(dataId: any) {
+  const router = useRouter();
   const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
   const [formData, setFormData] = React.useState<FormData>({
     id: "",
+    dataid: dataId.dataId,
     request: "",
     intention: "",
     duration: "",
@@ -63,6 +67,7 @@ export function DataRequestForm() {
       setIsSubmitted(true);
       setFormData({
         id: "",
+        dataid: dataId.dataId,
         request: "",
         intention: "",
         duration: "",
@@ -72,7 +77,7 @@ export function DataRequestForm() {
     } else {
       return console.error("Failed to save data request");
     }
-    // router.refresh();
+    router.push(`/dashboard`);
   }
 
   return (

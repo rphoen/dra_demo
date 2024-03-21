@@ -44,7 +44,6 @@ export function Catalog() {
                     </DialogHeader>
                     {/* <Button onClick={fetchData}>Fetch Data</Button>
                     {data && <pre>{JSON.stringify(data,null,2)}</pre>} */}
-                    <DataRequestForm />
                     <DataRequestDeny />
                     <DataRequestGrant />
                 </DialogContent>

@@ -4,6 +4,7 @@ import path from "path";
 
 interface DataRequest {
   id: string;
+  dataid: string;
   request: string;
   intention: string;
   duration: string;
@@ -40,6 +41,7 @@ export async function POST(req: NextRequest) {
 
     const newRequest: DataRequest = {
       id: newId,
+      dataid: dataRequest.dataid,
       request: dataRequest.request,
       intention: dataRequest.intention,
       duration: dataRequest.duration,
