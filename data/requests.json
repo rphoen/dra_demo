@@ -2,6 +2,7 @@
   {
     "id": "1",
     "dataid": "1",
+    "reason": "",
     "request": "Client data",
     "intention": "Requesting for client data...",
     "duration": "2 days",
@@ -11,6 +12,7 @@
   {
     "id": "2",
     "dataid": "1",
+    "reason": "",
     "request": "API access",
     "intention": "I need API access",
     "duration": "2 days",
@@ -20,6 +22,7 @@
   {
     "id": "3",
     "dataid": "1",
+    "reason": "",
     "request": "Client data",
     "intention": "Requesting for client data...",
     "duration": "1 day",
@@ -29,10 +32,11 @@
   {
     "id": "4",
     "dataid": "2",
-    "request": "test2",
+    "reason": "test1",
+    "request": "tessst",
     "intention": "Testing in web api",
-    "duration": "4 days",
-    "datacontrol": "Clear",
-    "status": "Accepted"
+    "duration": "3 days",
+    "datacontrol": "Masked",
+    "status": "Rejected"
   }
 ]

@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
+import { useRouter } from "next/navigation";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -24,6 +25,24 @@ export type Request = {
   intention: string;
   duration: string;
   datacontrol: "masked" | "clear";
+};
+
+const deleteRequest = async (requestId: string) => {
+  try {
+    const response = await fetch(`/api/requests/${requestId}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      console.log('Request deleted');
+      // router.refresh(); 
+    } else {
+      const error = await response.json();
+      console.error('Error deleting request:', error.error);
+    }
+  } catch (error) {
+    console.error('Error deleting request:', error);
+  }
 };
 
 export const columns: ColumnDef<Request>[] = [
@@ -72,7 +91,7 @@ export const columns: ColumnDef<Request>[] = [
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Edit</DropdownMenuItem>
-              <DropdownMenuItem>Delete</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => deleteRequest(request.id)}>Delete</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

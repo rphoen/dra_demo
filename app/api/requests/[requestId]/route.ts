@@ -14,13 +14,9 @@ interface Request {
 
 interface UpdateRequest {
   request?: string;
+  reason?: string;
   duration?: string;
   status?: string;
-}
-
-interface RejectRequest {
-  reason?: string;
-  status: string;
 }
 
 export async function GET(req: NextRequest) {
@@ -47,7 +43,7 @@ export async function GET(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   try {
     const requestId = req.url?.split("/").pop();
-    const updatedData: any = await req.json();
+    const updatedData: UpdateRequest = await req.json();
 
     if (!requestId) {
       return new Response(JSON.stringify({ error: "Missing request ID" }), {
@@ -68,14 +64,12 @@ export async function PATCH(req: NextRequest) {
     }
 
     if (updatedData.status === "Accepted") {
-      const updatedData: UpdateRequest = await req.json();
       const updatedRequest = {
         ...requests[requestIndex],
         ...updatedData,
       };
       requests[requestIndex] = updatedRequest;
     } else if (updatedData.status === "Rejected") {
-      const updatedData: RejectRequest = await req.json();
       const updatedRequest = {
         ...requests[requestIndex],
         ...updatedData,
@@ -94,5 +88,35 @@ export async function PATCH(req: NextRequest) {
     return new Response(JSON.stringify({ error: "Error updating request" }), {
       status: 500,
     });
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const requestId = req.url?.split('/').pop();
+
+    if (!requestId) {
+      return new Response(JSON.stringify({ error: 'Missing request ID' }), { status: 400 });
+    }
+
+    const filePath = path.join(process.cwd(), 'data', 'requests.json');
+    const jsonData = fs.readFileSync(filePath, 'utf8');
+    const requests: Request[] = JSON.parse(jsonData);
+
+    const requestIndex = requests.findIndex((req) => req.id === requestId);
+
+    if (requestIndex === -1) {
+      return new Response(JSON.stringify({ error: 'Request not found' }), { status: 404 });
+    }
+
+    // Remove the request from the array
+    requests.splice(requestIndex, 1);
+
+    fs.writeFileSync(filePath, JSON.stringify(requests, null, 2));
+
+    return new Response(JSON.stringify({ message: 'Request deleted successfully' }), { status: 200 });
+  } catch (error) {
+    console.error('Error deleting request:', error);
+    return new Response(JSON.stringify({ error: 'Error deleting request' }), { status: 500 });
   }
 }

@@ -26,7 +26,7 @@ export default function DataRequest({ params }: PageProps) {
                 <DataRequestGrant requestId={requestId}/>
               </TabsContent>
               <TabsContent value="reject">
-                <DataRequestDeny />
+                <DataRequestDeny requestId={requestId}/>
               </TabsContent>
             </Tabs>
           </div>

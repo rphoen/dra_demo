@@ -1,9 +1,15 @@
-import React from 'react'
+import { AdminPage } from "@/components/admin";
+import { DashboardHeader } from "@/components/header";
+import { DashboardShell } from "@/components/shell";
 
-const page = () => {
+export default async function DemoPage() {
   return (
-    <div>page</div>
-  )
+    <div className="py-5 px-60">
+      <DashboardHeader
+        heading="Admin Menu"
+        text="Manage users"
+      ></DashboardHeader>
+      <AdminPage />
+    </div>
+  );
 }
-
-export default page

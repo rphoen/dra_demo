@@ -24,6 +24,7 @@ import { useRouter } from "next/navigation";
 
 interface FormData {
   id: string;
+  reason?: string;
   dataid: string;
   request: string;
   intention: string;
@@ -38,6 +39,7 @@ export function DataRequestForm(dataId: any) {
   const [formData, setFormData] = React.useState<FormData>({
     id: "",
     dataid: dataId.dataId,
+    reason: "",
     request: "",
     intention: "",
     duration: "",
@@ -68,6 +70,7 @@ export function DataRequestForm(dataId: any) {
       setFormData({
         id: "",
         dataid: dataId.dataId,
+        reason: "",
         request: "",
         intention: "",
         duration: "",

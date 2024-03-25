@@ -35,11 +35,11 @@ export function DataRequestDeny(requestId: any) {
     setIsLoading(true);
 
     const requestData = {
-      request: formData.reason,
+      reason: formData.reason,
       status: "Rejected",
     };
 
-    const response = await fetch(`/api/requests/${requestId.requestId}/reject`, {
+    const response = await fetch(`/api/requests/${requestId.requestId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export function DataRequestDeny(requestId: any) {
         <CardDescription>Choose the data to request</CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="reason">Reason for denial</Label>
@@ -75,11 +75,18 @@ export function DataRequestDeny(requestId: any) {
               />
             </div>
           </div>
+          <div className="flex justify-between py-6">
+            {isSubmitted? (
+              <Button disabled>
+                Submitted
+              </Button>
+            ) : (
+              <Button type="submit" variant="destructive">Deny Access</Button>
+            )}
+            
+          </div>
         </form>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button>Submit</Button>
-      </CardFooter>
     </Card>
   );
 }

@@ -6,6 +6,10 @@ export const dashboardConfig: DashboardConfig = {
       title: "Admin",
       href: "/admin",
     },
+    {
+      title: "Dashboard",
+      href: "/dashboard",
+    }
   ],
   sidebarNav: [
     {

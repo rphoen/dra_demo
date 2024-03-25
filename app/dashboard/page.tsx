@@ -9,7 +9,7 @@ export default async function DemoPage() {
     <DashboardShell>
       <DashboardHeader heading="Requests" text="Create and manage requests.">
           <CommandMenu />
-          <Catalog />
+          {/* <Catalog /> */}
       </DashboardHeader>
 
       <div className="divide-y ">

@@ -10,6 +10,7 @@ import { DataRequestDeny } from "./dataRequestDeny";
 interface DataRequest {
   id: string;
   dataid: string;
+  reason: string;
   request: string;
   intention: string;
   duration: string;
@@ -46,7 +47,7 @@ export default function DataRequestInfo(requestId: any) {
             <p className="leading-7">Duration: {data.duration}</p>
             <p className="leading-7">Data Control: {data.datacontrol}</p>
             <p className="leading-7">Status: {data.status}</p>
-            <p className="leading-7">Reason for rejection: {data.rejection}</p>
+            <p className="leading-7">Reason for rejection: {data.reason}</p>
           </div>
         </div>
       )}
