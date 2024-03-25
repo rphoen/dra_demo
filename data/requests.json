@@ -29,28 +29,10 @@
   {
     "id": "4",
     "dataid": "2",
-    "request": "test",
+    "request": "test2",
     "intention": "Testing in web api",
-    "duration": "3 days",
+    "duration": "4 days",
     "datacontrol": "Clear",
-    "status": "Pending"
-  },
-  {
-    "id": "5",
-    "dataid": "1",
-    "request": "",
-    "intention": "",
-    "duration": "",
-    "datacontrol": "",
-    "status": "Pending"
-  },
-  {
-    "id": "6",
-    "dataid": "1",
-    "request": "",
-    "intention": "",
-    "duration": "",
-    "datacontrol": "",
-    "status": "Pending"
+    "status": "Accepted"
   }
 ]

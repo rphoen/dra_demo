@@ -18,36 +18,10 @@ interface UpdateRequest {
   status?: string;
 }
 
-interface RejectRequest {
-  reason?: string;
-  status: string;
-}
-
-export async function GET(req: NextRequest) {
-  try {
-    const requestId = req.url?.split("/").pop();
-
-    const filePath = path.join(process.cwd(), "data", "requests.json");
-    const jsonData = fs.readFileSync(filePath, "utf8");
-    const requests: Request[] = JSON.parse(jsonData);
-
-    const request = requests.find((req) => req.id === requestId);
-
-    if (request) {
-      return Response.json(request);
-    } else {
-      return Response.json({ error: "Request not found" });
-    }
-  } catch (error) {
-    console.error("Error getting request:", error);
-    return Response.json({ error: "Error getting request" });
-  }
-}
-
 export async function PATCH(req: NextRequest) {
   try {
     const requestId = req.url?.split("/").pop();
-    const updatedData: any = await req.json();
+    const updatedData: UpdateRequest = await req.json();
 
     if (!requestId) {
       return new Response(JSON.stringify({ error: "Missing request ID" }), {
@@ -67,21 +41,11 @@ export async function PATCH(req: NextRequest) {
       });
     }
 
-    if (updatedData.status === "Accepted") {
-      const updatedData: UpdateRequest = await req.json();
-      const updatedRequest = {
-        ...requests[requestIndex],
-        ...updatedData,
-      };
-      requests[requestIndex] = updatedRequest;
-    } else if (updatedData.status === "Rejected") {
-      const updatedData: RejectRequest = await req.json();
-      const updatedRequest = {
-        ...requests[requestIndex],
-        ...updatedData,
-      };
-      requests[requestIndex] = updatedRequest;
-    }
+    const updatedRequest = {
+      ...requests[requestIndex],
+      ...updatedData,
+    };
+    requests[requestIndex] = updatedRequest;
 
     fs.writeFileSync(filePath, JSON.stringify(requests, null, 2));
 

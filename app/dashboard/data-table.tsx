@@ -131,7 +131,7 @@ export function DataTable<TData, TValue>({
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     const requestId = Number(row.id) + 1;
-                    router.push(`/dashboard/datarequest/${requestId}`);
+                    router.push(`/dashboard/requests/${requestId}`);
                   }}
                 >
                   {row.getVisibleCells().map((cell) => (

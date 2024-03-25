@@ -67,7 +67,7 @@ export function CommandMenu() {
                   key={item.id}
                   value={item}
                   onSelect={() => {
-                    router.push(`/dashboard/datarequest/form/${item.id}`);
+                    router.push(`/dashboard/requests/form/${item.id}`);
                   }}
                   style={{ cursor: "pointer" }}
                 >
