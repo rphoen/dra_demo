@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Demo",
+  name: "DRA Demo",
   description:
     "Demo DRA with server side sorting, pagination, and filtering",
   url: "http://localhost:3000",

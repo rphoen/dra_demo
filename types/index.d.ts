@@ -30,3 +30,11 @@ export type DashboardConfig = {
   mainNav: MainNavItem[]
   sidebarNav: SidebarNavItem[]
 }
+
+export type User = {
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+  role: string;
+}

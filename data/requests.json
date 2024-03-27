@@ -7,17 +7,18 @@
     "intention": "Requesting for client data...",
     "duration": "2 days",
     "datacontrol": "Clear",
-    "status": "Pending"
+    "status": "Pending",
+    "role": "dataowner"
   },
   {
     "id": "2",
     "dataid": "1",
-    "reason": "",
+    "reason": "no",
     "request": "API access",
     "intention": "I need API access",
     "duration": "2 days",
     "datacontrol": "Masked",
-    "status": "Pending"
+    "status": "Rejected"
   },
   {
     "id": "3",
@@ -38,5 +39,15 @@
     "duration": "3 days",
     "datacontrol": "Masked",
     "status": "Rejected"
+  },
+  {
+    "id": "5",
+    "dataid": "1",
+    "request": "test2",
+    "intention": "a",
+    "duration": "2 days",
+    "datacontrol": "Masked",
+    "status": "Rejected",
+    "reason": "denied"
   }
 ]

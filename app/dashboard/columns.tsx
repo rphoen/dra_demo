@@ -48,7 +48,7 @@ const deleteRequest = async (requestId: string) => {
 export const columns: ColumnDef<Request>[] = [
   {
     accessorKey: "request",
-    header: "Request",
+    header: "Access Mode",
   },
   {
     accessorKey: "intention",

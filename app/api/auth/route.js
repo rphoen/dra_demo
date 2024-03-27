@@ -14,10 +14,12 @@ export async function POST(request) {
 
   // Check if the user exists and the password matches
   if (user && user.password === password) {
-    return new Response(JSON.stringify({ authenticated: true }), {
+    const { role } = user;
+    return new Response(JSON.stringify({ authenticated: true, role }), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
+        'Set-Cookie': `role=${role}; Path=/;`,
       },
     });
   } else {

@@ -1,28 +1,31 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { useSelectedLayoutSegment } from "next/navigation"
+import * as React from "react";
+import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { Icons } from "@/components/icons"
-import { MainNavItem } from "@/types"
-import { MobileNav } from "./mobile-nav"
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+import { Icons } from "@/components/icons";
+import { MainNavItem } from "@/types";
+import { MobileNav } from "./mobile-nav";
+import Image from "next/image";
+import AttIcon from "../public/attlogo.jpg";
+import { signOut } from "next-auth/react";
 
 interface MainNavProps {
-  items?: MainNavItem[]
-  children?: React.ReactNode
+  items?: MainNavItem[];
+  children?: React.ReactNode;
 }
 
 export function MainNav({ items, children }: MainNavProps) {
-  const segment = useSelectedLayoutSegment()
-  const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
+  const segment = useSelectedLayoutSegment();
+  const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
 
   return (
     <div className="flex gap-6 md:gap-10">
       <Link href="/" className="hidden items-center space-x-2 md:flex">
-        <Icons.logo />
+        <Image src={AttIcon} alt="Logo" width={28} height={28} />
         <span className="hidden font-bold sm:inline-block">
           {siteConfig.name}
         </span>
@@ -46,6 +49,15 @@ export function MainNav({ items, children }: MainNavProps) {
           ))}
         </nav>
       ) : null}
+      <form
+        action={async () => {
+          await signOut();
+        }}
+      >
+        <button className="flex text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm text-foreground/60 items-center ml-auto">
+          <div className="hidden md:block">Sign Out</div>
+        </button>
+      </form>
       <button
         className="flex items-center space-x-2 md:hidden"
         onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -57,5 +69,5 @@ export function MainNav({ items, children }: MainNavProps) {
         <MobileNav items={items}>{children}</MobileNav>
       )}
     </div>
-  )
+  );
 }

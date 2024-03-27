@@ -7,7 +7,8 @@ import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { Icons } from "./icons";
-import { toast } from "./ui/use-toast"
+import { toast } from "./ui/use-toast";
+import { signIn } from "next-auth/react";
 
 export function UserAuthForm() {
   const [username, setUsername] = useState("");
@@ -21,36 +22,56 @@ export function UserAuthForm() {
     e.preventDefault();
     setIsLoading(true);
 
-    try {
-      const response = await fetch("/api/auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
+    const result: any = await signIn("credentials", {
+      redirect: false,
+      username,
+      password,
+    });
 
+    if (result) {
+      setIsAuthenticated(true);
+      setError("");
+      router.push("/dashboard");
+    } else {
       setIsLoading(false);
-
-      const data = await response.json();
-
-      if (data.authenticated) {
-        setIsAuthenticated(true);
-        setError("");
-        router.push("/dashboard");
-      } else {
-        setIsAuthenticated(false);
-        setError(data.message);
-        return toast({
-            title: "Something went wrong.",
-            description: "Your sign in request failed. Please try again.",
-            variant: "destructive",
-          })
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setError("An error occurred during authentication");
+      setError(result.error);
+      return toast({
+        title: "Something went wrong.",
+        description: "Your sign in request failed. Please try again.",
+        variant: "destructive",
+      });
     }
+
+    // try {
+    //   const response = await fetch("/api/auth", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ username, password }),
+    //   });
+
+    //   setIsLoading(false);
+
+    //   const data = await response.json();
+
+    //   if (data.authenticated) {
+    //     setIsAuthenticated(true);
+    //     setError("");
+    //     router.push("/dashboard");
+    //   } else {
+    //     setIsAuthenticated(false);
+    //     setError(data.message);
+    //     return toast({
+    //       title: "Something went wrong.",
+    //       description: "Your sign in request failed. Please try again.",
+    //       variant: "destructive",
+    //     });
+    //   }
+    // } catch (error) {
+    //   console.error("Error:", error);
+    //   setError("An error occurred during authentication");
+    // }
   };
 
   return (
@@ -81,7 +102,11 @@ export function UserAuthForm() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Button type="submit" className={cn(buttonVariants())} disabled={isLoading}>
+          <Button
+            type="submit"
+            className={cn(buttonVariants())}
+            disabled={isLoading}
+          >
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}

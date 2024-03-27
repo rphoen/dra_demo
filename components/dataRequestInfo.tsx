@@ -42,7 +42,7 @@ export default function DataRequestInfo(requestId: any) {
       {data && (
         <div className="px-2 py-10">
           <div className="grid w-full grid-cols-2">
-            <p className="leading-7">Request: {data.request}</p>
+            <p className="leading-7">Data Access Mode: {data.request}</p>
             <p className="leading-7">Intention: {data.intention}</p>
             <p className="leading-7">Duration: {data.duration}</p>
             <p className="leading-7">Data Control: {data.datacontrol}</p>

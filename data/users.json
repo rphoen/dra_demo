@@ -1,23 +1,23 @@
 [
     {
       "id": 1,
-      "username": "admin",
+      "name": "admin",
       "email": "admin@example.com",
       "password": "admin",
-      "roles": ["Admin", "Data Owner"]
+      "role": "ADMIN" 
     },
     {
       "id": 2,
-      "username": "Jane",
-      "email": "jane@example.com",
-      "password": "password456",
-      "roles": ["Data Requestor", "Reviewer"]
+      "name": "ryan",
+      "email": "ryan@example.com",
+      "password": "ryan",
+      "role": "datarequestor"
     },
     {
       "id": 3,
-      "username": "Bob",
-      "email": "bob@example.com",
-      "password": "password789",
-      "roles": ["Data Owner"]
+      "name": "dataowner",
+      "email": "ryan@example.com",
+      "password": "dataowner",
+      "role": "dataowner"
     }
   ]
