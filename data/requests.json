@@ -41,13 +41,12 @@
     "status": "Rejected"
   },
   {
-    "id": "5",
+    "id": "6",
     "dataid": "1",
-    "request": "test2",
-    "intention": "a",
-    "duration": "2 days",
-    "datacontrol": "Masked",
-    "status": "Rejected",
-    "reason": "denied"
+    "request": "a",
+    "intention": "",
+    "duration": "",
+    "datacontrol": "",
+    "status": "Pending"
   }
 ]

@@ -24,7 +24,7 @@ export default function DataTableData() {
     };
 
     getData();
-  });
+  }, []);
 
   return <DataTable columns={columns} data={data} />;
 }

@@ -21,6 +21,7 @@ interface UpdateRequest {
 export async function PATCH(req: NextRequest) {
   try {
     const requestId = req.url?.split("/").pop();
+    console.log(requestId);
     const updatedData: UpdateRequest = await req.json();
 
     if (!requestId) {
