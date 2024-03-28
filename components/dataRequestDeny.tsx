@@ -12,6 +12,7 @@ import {
 } from "./ui/card";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { useToast } from "./ui/use-toast";
 
 interface UpdateRequest {
   reason: string;
@@ -19,6 +20,7 @@ interface UpdateRequest {
 }
 
 export function DataRequestDeny(requestId: any) {
+  const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
   const [formData, setFormData] = React.useState<UpdateRequest>({
     reason: "",
@@ -50,6 +52,10 @@ export function DataRequestDeny(requestId: any) {
     setIsLoading(false);
     if (response.ok) {
       setIsSubmitted(true);
+      toast({
+        title: "Request denied",
+        description: "The data request has been denied",
+      });
     } else {
       return console.error("Failed to save data request");
     }
@@ -76,14 +82,13 @@ export function DataRequestDeny(requestId: any) {
             </div>
           </div>
           <div className="flex justify-between py-6">
-            {isSubmitted? (
-              <Button disabled>
-                Submitted
-              </Button>
+            {isSubmitted ? (
+              <Button disabled>Submitted</Button>
             ) : (
-              <Button type="submit" variant="destructive">Deny Access</Button>
+              <Button type="submit" variant="destructive">
+                Deny Access
+              </Button>
             )}
-            
           </div>
         </form>
       </CardContent>

@@ -45,8 +45,27 @@
     "dataid": "1",
     "request": "a",
     "intention": "",
+    "duration": "a",
+    "datacontrol": "Masked",
+    "status": "Accepted"
+  },
+  {
+    "id": "6",
+    "dataid": "1",
+    "request": "a",
+    "intention": "a",
     "duration": "",
     "datacontrol": "",
     "status": "Pending"
+  },
+  {
+    "id": "7",
+    "dataid": "2",
+    "request": "",
+    "intention": "test",
+    "duration": "2 days",
+    "datacontrol": "Clear",
+    "status": "Accepted",
+    "reason": "a"
   }
 ]

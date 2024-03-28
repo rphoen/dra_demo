@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import e from "cors";
 import { useRouter } from "next/navigation";
+import { useToast } from "./ui/use-toast";
 
 interface FormData {
   id: string;
@@ -34,6 +35,7 @@ interface FormData {
 }
 
 export function DataRequestForm(dataId: any) {
+  const {toast} = useToast();
   const router = useRouter();
   const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
   const [formData, setFormData] = React.useState<FormData>({
@@ -76,6 +78,10 @@ export function DataRequestForm(dataId: any) {
         duration: "",
         datacontrol: "",
         status: "Pending",
+      });
+      toast({
+        title: "Request submitted",
+        description: "Your request has been submitted successfully",
       });
     } else {
       return console.error("Failed to save data request");

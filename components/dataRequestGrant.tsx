@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
+import { useToast } from "./ui/use-toast";
 
 interface UpdateRequest {
   request: string;
@@ -30,6 +31,7 @@ interface UpdateRequest {
 }
 
 export function DataRequestGrant(requestId: any) {
+  const {toast } = useToast();
   const router = useRouter();
   const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
   const [formData, setFormData] = React.useState<UpdateRequest>({
@@ -66,6 +68,10 @@ export function DataRequestGrant(requestId: any) {
     setIsLoading(false);
     if (response.ok) {
       setIsSubmitted(true);
+      toast({
+        title: "Request granted",
+        description: "Data request has been granted successfully",
+      })
     } else {
       return console.error("Failed to save data request");
     }

@@ -17,24 +17,6 @@ app.prepare().then(() => {
     res.json({ message: "Hello from the server!" });
   });
 
-  server.get("/api/databricks", async (req, res) => {
-    try {
-      const databricksResponse = await axios.get(
-        `${databricksUrl}/api/2.1/unity-catalog/catalogs`,
-        {
-          headers: {
-            Authorization: `Bearer ${databricksToken}`,
-          },
-          params: req.query,
-        }
-      );
-      res.status(200).json(databricksResponse.data);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Error fetching data from Databricks" });
-    }
-  });
-
   server.use(express.json());
   // All other routes are handled by Next.js
   server.all("*", (req, res) => {

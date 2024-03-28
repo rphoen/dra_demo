@@ -19,5 +19,12 @@
       "email": "ryan@example.com",
       "password": "dataowner",
       "role": "dataowner"
+    },
+    {
+      "id": 4,
+      "name": "reviewer",
+      "email": "reviewer@example.com",
+      "password": "reviewer",
+      "role": "reviewer"
     }
   ]
