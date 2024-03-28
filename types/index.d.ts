@@ -38,3 +38,16 @@ export type User = {
   password: string;
   role: string;
 }
+
+export type DataRequest = {
+  id: string;
+  dataid: string;
+  reason?: string;
+  request: string;
+  intention: string;
+  duration: string;
+  datacontrol: string;
+  status: string;
+  requestor: string;
+  dataowner: string;
+}

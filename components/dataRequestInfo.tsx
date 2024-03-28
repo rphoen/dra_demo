@@ -3,21 +3,7 @@
 import { useEffect, useState } from "react";
 import { DashboardHeader } from "./header";
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
-import { DataRequestGrant } from "./dataRequestGrant";
-import { TabsContent } from "@radix-ui/react-tabs";
-import { DataRequestDeny } from "./dataRequestDeny";
-
-interface DataRequest {
-  id: string;
-  dataid: string;
-  reason: string;
-  request: string;
-  intention: string;
-  duration: string;
-  datacontrol: string;
-  status: string;
-  rejection: string;
-}
+import type { DataRequest } from "@/types";
 
 export default function DataRequestInfo(requestId: any) {
   const [data, setData] = useState<DataRequest | null>(null);
@@ -48,6 +34,8 @@ export default function DataRequestInfo(requestId: any) {
             <p className="leading-7">Data Control: {data.datacontrol}</p>
             <p className="leading-7">Status: {data.status}</p>
             <p className="leading-7">Reason for rejection: {data.reason}</p>
+            <p className="leading-7">Requestor name: {data.requestor}</p>
+            <p className="leading-7">Data owner: {data.dataowner}</p>
           </div>
         </div>
       )}

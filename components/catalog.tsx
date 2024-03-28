@@ -2,29 +2,20 @@
 
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "./ui/dialog";
 import { useToast } from "./ui/use-toast";
 
+interface TableData {
+  data: {
+    name: string;
+    owner: string;
+  };
+}
+
+
 export function Catalog() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<TableData | null>(null);
   const [error, setError] = useState(null);
   const { toast } = useToast();
-
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const handleButtonClick = () => {
-    setIsDialogOpen(true);
-  };
-
-  const handleDialogClose = () => {
-    setIsDialogOpen(false);
-  };
 
   const fetchData = async () => {
     try {
@@ -37,30 +28,28 @@ export function Catalog() {
     }
   };
 
+  const filterData = () => {
+    if (!data || !data.data) {
+      return null;
+    }
+
+    const { name, owner } = data.data;
+    return { name, owner };
+  };
+
+  const filteredData = filterData();
+
   return (
     <div>
-      <Button
-        onClick={() => {
-          toast({
-            title: "esto es una prueba",
-          });
-        }}
-      >
-        Toast
-      </Button>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button>Test</Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Add request</DialogTitle>
-          </DialogHeader>
-          <Button onClick={fetchData}>Fetch Data</Button>
-
-          {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-        </DialogContent>
-      </Dialog>
+      <Button onClick={fetchData}>Fetch Data</Button>
+{/* 
+      {data && <pre>{JSON.stringify(data, null, 2)}</pre>} */}
+      {filteredData && (
+        <div>
+          <p>Table name: {filteredData.name}</p>
+          <p>Owner: {filteredData.owner}</p>
+          </div>
+      )}
     </div>
   );
 }

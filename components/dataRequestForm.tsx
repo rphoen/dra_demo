@@ -22,17 +22,7 @@ import {
 import e from "cors";
 import { useRouter } from "next/navigation";
 import { useToast } from "./ui/use-toast";
-
-interface FormData {
-  id: string;
-  reason?: string;
-  dataid: string;
-  request: string;
-  intention: string;
-  duration: string;
-  datacontrol: string;
-  status: string;
-}
+import type { DataRequest as FormData} from "@/types";
 
 export function DataRequestForm(dataId: any) {
   const {toast} = useToast();
@@ -47,6 +37,8 @@ export function DataRequestForm(dataId: any) {
     duration: "",
     datacontrol: "",
     status: "Pending",
+    requestor: "Ryan",
+    dataowner: "Bob"
   });
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
@@ -78,6 +70,8 @@ export function DataRequestForm(dataId: any) {
         duration: "",
         datacontrol: "",
         status: "Pending",
+        requestor: "Ryan",
+        dataowner: "Bob",
       });
       toast({
         title: "Request submitted",

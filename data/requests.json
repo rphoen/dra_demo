@@ -8,7 +8,9 @@
     "duration": "2 days",
     "datacontrol": "Clear",
     "status": "Pending",
-    "role": "dataowner"
+    "role": "dataowner",
+    "requestor": "Ryan",
+    "dataowner": "Bob"
   },
   {
     "id": "2",
@@ -18,7 +20,9 @@
     "intention": "I need API access",
     "duration": "2 days",
     "datacontrol": "Masked",
-    "status": "Rejected"
+    "status": "Rejected",
+    "requestor": "Ryan",
+    "dataowner": "Bob"
   },
   {
     "id": "3",
@@ -28,7 +32,9 @@
     "intention": "Requesting for client data...",
     "duration": "1 day",
     "datacontrol": "Clear",
-    "status": "Rejected"
+    "status": "Rejected",
+    "requestor": "Ryan",
+    "dataowner": "Bob"
   },
   {
     "id": "4",
@@ -38,34 +44,19 @@
     "intention": "Testing in web api",
     "duration": "3 days",
     "datacontrol": "Masked",
-    "status": "Rejected"
+    "status": "Rejected",
+    "requestor": "Ryan",
+    "dataowner": "Bob"
   },
   {
-    "id": "6",
+    "id": "5",
     "dataid": "1",
-    "request": "a",
-    "intention": "",
-    "duration": "a",
-    "datacontrol": "Masked",
-    "status": "Accepted"
-  },
-  {
-    "id": "6",
-    "dataid": "1",
-    "request": "a",
-    "intention": "a",
-    "duration": "",
-    "datacontrol": "",
-    "status": "Pending"
-  },
-  {
-    "id": "7",
-    "dataid": "2",
-    "request": "",
+    "request": "test",
     "intention": "test",
-    "duration": "2 days",
-    "datacontrol": "Clear",
-    "status": "Accepted",
-    "reason": "a"
+    "duration": "5 days",
+    "datacontrol": "Masked",
+    "status": "Pending",
+    "requestor": "Ryan",
+    "dataowner": "Bob"
   }
 ]

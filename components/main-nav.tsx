@@ -63,7 +63,7 @@ export function MainNav({ items, children }: MainNavProps) {
         )}
       </div>
       <form
-          className="flex text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm text-foreground/60 items-center"
+          className="flex text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm text-foreground/60 items-center ml-auto"
           action={async () => {
             await signOut();
           }}

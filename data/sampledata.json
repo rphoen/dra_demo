@@ -2,11 +2,11 @@
     {
       "id": "1",
       "data": "Sample 1",
-      "owner": "admin"
+      "owner": "Bob"
     },
     {
       "id": "2",
       "data": "Sample 2",
-      "owner": "ryan"
+      "owner": "Ryan"
     }
   ]

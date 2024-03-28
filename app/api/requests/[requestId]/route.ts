@@ -1,16 +1,7 @@
 import fs from "fs";
 import { NextRequest } from "next/server";
 import path from "path";
-
-interface Request {
-  id: string;
-  dataid: string;
-  request: string;
-  intention: string;
-  duration: string;
-  datacontrol: string;
-  status: string;
-}
+import type { DataRequest } from "@/types";
 
 interface UpdateRequest {
   request?: string;
@@ -25,7 +16,7 @@ export async function GET(req: NextRequest) {
 
     const filePath = path.join(process.cwd(), "data", "requests.json");
     const jsonData = fs.readFileSync(filePath, "utf8");
-    const requests: Request[] = JSON.parse(jsonData);
+    const requests: DataRequest[] = JSON.parse(jsonData);
 
     const request = requests.find((req) => req.id === requestId);
 
@@ -53,7 +44,7 @@ export async function PATCH(req: NextRequest) {
 
     const filePath = path.join(process.cwd(), "data", "requests.json");
     const jsonData = fs.readFileSync(filePath, "utf8");
-    const requests: Request[] = JSON.parse(jsonData);
+    const requests: DataRequest[] = JSON.parse(jsonData);
 
     const requestIndex = requests.findIndex((req) => req.id === requestId);
 
@@ -101,7 +92,7 @@ export async function DELETE(req: NextRequest) {
 
     const filePath = path.join(process.cwd(), 'data', 'requests.json');
     const jsonData = fs.readFileSync(filePath, 'utf8');
-    const requests: Request[] = JSON.parse(jsonData);
+    const requests: DataRequest[] = JSON.parse(jsonData);
 
     const requestIndex = requests.findIndex((req) => req.id === requestId);
 

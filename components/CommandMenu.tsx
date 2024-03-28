@@ -25,18 +25,18 @@ export function CommandMenu() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const getCatalog = async () => {
-    try {
-      const response = await fetch(`/api/databricks`);
-      const data = await response.json();
-      setData(data);
-    } catch (error) {
-      console.error("Error searching data assets:", error);
-      setData([]);
-    }
-  };
-
   useEffect(() => {
+    const getCatalog = async () => {
+      try {
+        const response = await fetch(`/api/databricks`);
+        const data = await response.json();
+        setData(data);
+      } catch (error) {
+        console.error("Error searching data assets:", error);
+        setData([]);
+      }
+    };
+
     async function getData() {
       setLoading(true);
       const res = await fetch(`/api/sampledata`);

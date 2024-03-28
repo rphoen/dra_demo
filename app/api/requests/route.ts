@@ -1,23 +1,14 @@
 import fs from "fs";
 import { NextRequest } from "next/server";
 import path from "path";
-
-interface DataRequest {
-  id: string;
-  dataid: string;
-  request: string;
-  intention: string;
-  duration: string;
-  datacontrol: string;
-  status: string;
-}
+import type { DataRequest } from "@/types";
 
 export function GET() {
   const filePath = path.join(process.cwd(), "data", "requests.json");
   const jsonData = fs.readFileSync(filePath, "utf8");
-  const users = JSON.parse(jsonData);
+  const requests = JSON.parse(jsonData);
 
-  return Response.json(users);
+  return Response.json(requests);
 }
 
 export async function POST(req: NextRequest) {
@@ -47,6 +38,8 @@ export async function POST(req: NextRequest) {
       duration: dataRequest.duration,
       datacontrol: dataRequest.datacontrol,
       status: dataRequest.status,
+      requestor: dataRequest.requestor,
+      dataowner: dataRequest.dataowner,
     };
     requests.push(newRequest);
 

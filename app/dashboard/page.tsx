@@ -10,7 +10,7 @@ export default async function DemoPage() {
   return (
     <DashboardShell>
       <DashboardHeader heading="Requests" text="Create and manage requests.">
-          {session && <p>Role: {session.user.role}</p>}
+          {session && <p className="text-base text-muted-foreground">Role: {session.user.role}</p>}
           <CommandMenu />
 
       </DashboardHeader>
