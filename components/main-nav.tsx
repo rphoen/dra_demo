@@ -11,7 +11,6 @@ import { MainNavItem } from "@/types";
 import { MobileNav } from "./mobile-nav";
 import Image from "next/image";
 import AttIcon from "../public/attlogo.jpg";
-import { signOut } from "next-auth/react";
 
 interface MainNavProps {
   items?: MainNavItem[];
@@ -23,7 +22,7 @@ export function MainNav({ items, children }: MainNavProps) {
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
 
   return (
-    <div className="flex justify-between gap-6 md:gap-10">
+    <div>
       <div className="flex gap-6 md:gap-10">
         <Link href="/" className="hidden items-center space-x-2 md:flex">
           <Image src={AttIcon} alt="Logo" width={28} height={28} />
@@ -62,16 +61,6 @@ export function MainNav({ items, children }: MainNavProps) {
           <MobileNav items={items}>{children}</MobileNav>
         )}
       </div>
-      <form
-          className="flex text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm text-foreground/60 items-center ml-auto"
-          action={async () => {
-            await signOut();
-          }}
-        >
-          <button>
-            <div className="hidden md:block">Sign Out</div>
-          </button>
-        </form>
     </div>
   );
 }

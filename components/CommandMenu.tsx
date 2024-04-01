@@ -14,26 +14,29 @@ import { Button } from "./ui/button";
 import { CommandLoading } from "cmdk";
 import { useRouter } from "next/navigation";
 
-interface Dataset {
-  name: string;
-  owner: string;
+interface TableData {
+  data: {
+    name: string;
+    owner: string;
+    table_id:string;
+  };
 }
 
 export function CommandMenu() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
+  const [catalog, setCatalog] = useState<TableData | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getCatalog = async () => {
       try {
         const response = await fetch(`/api/databricks`);
-        const data = await response.json();
-        setData(data);
+        const catalog = await response.json();
+        setCatalog(catalog);
       } catch (error) {
         console.error("Error searching data assets:", error);
-        setData([]);
       }
     };
 
@@ -44,13 +47,24 @@ export function CommandMenu() {
       setData(data);
       setLoading(false);
     }
-
+    getCatalog();
     getData();
   }, []);
 
   const handleOpenCommandDialog = () => {
     setOpen(true);
   };
+
+  const filterData = () => {
+    if (!catalog || !catalog.data) {
+      return null;
+    }
+
+    const { name, owner, table_id } = catalog.data;
+    return { name, owner, table_id };
+  };
+
+  const filteredData = filterData();
 
   return (
     <div>
@@ -61,6 +75,21 @@ export function CommandMenu() {
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Results">
             {loading && <CommandLoading>Fetching data...</CommandLoading>}
+            {filteredData && (
+              <CommandItem
+                key={filteredData.table_id}
+                // value={filteredData}
+                onSelect={() => {
+                  router.push(`/dashboard/requests/form/${filteredData.table_id}`);
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                <div className="flex flex-1 justify-between">
+                  <p> {filteredData.name} </p>
+                  <p> Owner: {filteredData.owner}</p>
+                </div>
+              </CommandItem>
+            )}
             {data.map((item: any) => {
               return (
                 <CommandItem
@@ -79,10 +108,6 @@ export function CommandMenu() {
               );
             })}
           </CommandGroup>
-          {/* <CommandGroup heading="Results">
-            <Button onClick={getCatalog}>Fetch Data</Button>
-            {data && <pre>{JSON.stringify(data,null,2)}</pre>}
-          </CommandGroup> */}
         </CommandList>
       </CommandDialog>
     </div>

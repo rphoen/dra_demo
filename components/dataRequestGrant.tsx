@@ -82,7 +82,6 @@ export function DataRequestGrant(requestId: any) {
     <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Grant Data Request</CardTitle>
-        <CardDescription>Granting request for *placeholder*</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit}>

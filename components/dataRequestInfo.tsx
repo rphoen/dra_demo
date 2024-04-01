@@ -36,6 +36,7 @@ export default function DataRequestInfo(requestId: any) {
             <p className="leading-7">Reason for rejection: {data.reason}</p>
             <p className="leading-7">Requestor name: {data.requestor}</p>
             <p className="leading-7">Data owner: {data.dataowner}</p>
+            <p className="leading-7">Reviewer: {data.reviewer}</p>
           </div>
         </div>
       )}

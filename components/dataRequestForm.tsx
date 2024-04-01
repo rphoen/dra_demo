@@ -38,7 +38,8 @@ export function DataRequestForm(dataId: any) {
     datacontrol: "",
     status: "Pending",
     requestor: "Ryan",
-    dataowner: "Bob"
+    dataowner: "Bob",
+    reviewer: ""
   });
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
@@ -72,6 +73,7 @@ export function DataRequestForm(dataId: any) {
         status: "Pending",
         requestor: "Ryan",
         dataowner: "Bob",
+        reviewer: "",
       });
       toast({
         title: "Request submitted",
@@ -119,6 +121,16 @@ export function DataRequestForm(dataId: any) {
                 name="duration"
                 placeholder="Duration"
                 value={formData.duration}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="reviewer">Reviewer</Label>
+              <Input
+                id="reviewer"
+                name="reviewer"
+                placeholder="Reviewer"
+                value={formData.reviewer}
                 onChange={handleChange}
               />
             </div>

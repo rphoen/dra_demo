@@ -50,4 +50,5 @@ export type DataRequest = {
   status: string;
   requestor: string;
   dataowner: string;
+  reviewer: string;
 }
