@@ -40,6 +40,7 @@ export async function POST(req: NextRequest) {
       status: dataRequest.status,
       requestor: dataRequest.requestor,
       dataowner: dataRequest.dataowner,
+      reviewer: dataRequest.reviewer,
     };
     requests.push(newRequest);
 
