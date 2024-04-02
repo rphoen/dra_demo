@@ -37,6 +37,7 @@ export default function DataRequestInfo(requestId: any) {
             <p className="leading-7">Requestor name: {data.requestor}</p>
             <p className="leading-7">Data owner: {data.dataowner}</p>
             <p className="leading-7">Reviewer: {data.reviewer}</p>
+            <p className="leading-7">Comment: {data.comment}</p>
           </div>
         </div>
       )}

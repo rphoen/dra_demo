@@ -8,6 +8,7 @@ interface UpdateRequest {
   reason?: string;
   duration?: string;
   status?: string;
+  comment?: string;
 }
 
 export async function GET(req: NextRequest) {
@@ -61,6 +62,12 @@ export async function PATCH(req: NextRequest) {
       };
       requests[requestIndex] = updatedRequest;
     } else if (updatedData.status === "Rejected") {
+      const updatedRequest = {
+        ...requests[requestIndex],
+        ...updatedData,
+      };
+      requests[requestIndex] = updatedRequest;
+    } else {
       const updatedRequest = {
         ...requests[requestIndex],
         ...updatedData,

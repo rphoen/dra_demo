@@ -1,7 +1,9 @@
+import { auth } from "@/auth";
 import { DataRequestDeny } from "@/components/dataRequestDeny";
 import { DataRequestForm } from "@/components/dataRequestForm";
 import { DataRequestGrant } from "@/components/dataRequestGrant";
 import DataRequestInfo from "@/components/dataRequestInfo";
+import { DataRequestReview } from "@/components/dataRequestReview";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import React from "react";
 
@@ -11,25 +13,33 @@ interface PageProps {
   };
 }
 
-export default function DataRequest({ params }: PageProps) {
+export default async function DataRequest({ params }: PageProps) {
+  const session = await auth();
   const { requestId } = params;
   return (
     <div>
-      <DataRequestInfo requestId={requestId}/>
+      <DataRequestInfo requestId={requestId} />
       <div className="py-5">
-            <Tabs defaultValue="accept" className="w-[350px]">
-              <TabsList className="grid w-full grid-cols-2 mb-1">
-                <TabsTrigger value="accept">Accept</TabsTrigger>
-                <TabsTrigger value="reject">Reject</TabsTrigger>
-              </TabsList>
-              <TabsContent value="accept">
-                <DataRequestGrant requestId={requestId}/>
-              </TabsContent>
-              <TabsContent value="reject">
-                <DataRequestDeny requestId={requestId}/>
-              </TabsContent>
-            </Tabs>
-          </div>
+        {session?.user.role === "dataowner" ? (
+          <Tabs defaultValue="accept" className="w-[350px]">
+            <TabsList className="grid w-full grid-cols-2 mb-1">
+              <TabsTrigger value="accept">Accept</TabsTrigger>
+              <TabsTrigger value="reject">Reject</TabsTrigger>
+            </TabsList>
+            <TabsContent value="accept">
+              <DataRequestGrant requestId={requestId} />
+            </TabsContent>
+            <TabsContent value="reject">
+              <DataRequestDeny requestId={requestId} />
+            </TabsContent>
+          </Tabs>
+        ) : (
+          <div></div>
+        )}
+        {session?.user.role === "reviewer" ? (
+          <DataRequestReview requestId={requestId} />
+        ) : <div></div>}
+      </div>
     </div>
   );
 }

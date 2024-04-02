@@ -11,7 +11,8 @@
     "role": "dataowner",
     "requestor": "Ryan",
     "dataowner": "Bob",
-    "reviewer": ""
+    "reviewer": "",
+    "comment": ""
   },
   {
     "id": "2",
@@ -24,7 +25,8 @@
     "status": "Rejected",
     "requestor": "Ryan",
     "dataowner": "Bob",
-    "reviewer": ""
+    "reviewer": "",
+    "comment": ""
   },
   {
     "id": "3",
@@ -37,7 +39,8 @@
     "status": "Rejected",
     "requestor": "Ryan",
     "dataowner": "Bob",
-    "reviewer": ""
+    "reviewer": "",
+    "comment": ""
   },
   {
     "id": "4",
@@ -50,7 +53,8 @@
     "status": "Rejected",
     "requestor": "Ryan",
     "dataowner": "Bob",
-    "reviewer": ""
+    "reviewer": "",
+    "comment": ""
   },
   {
     "id": "5",
@@ -62,7 +66,8 @@
     "status": "Pending",
     "requestor": "Ryan",
     "dataowner": "Bob",
-    "reviewer": ""
+    "reviewer": "",
+    "comment": ""
   },
   {
     "id": "6",
@@ -74,6 +79,7 @@
     "status": "Accepted",
     "requestor": "Ryan",
     "dataowner": "Bob",
-    "reviewer": "Alex"
+    "reviewer": "Alex",
+    "comment": "ok\n"
   }
 ]

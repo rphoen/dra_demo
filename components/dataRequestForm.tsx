@@ -39,7 +39,8 @@ export function DataRequestForm(dataId: any) {
     status: "Pending",
     requestor: "Ryan",
     dataowner: "Bob",
-    reviewer: ""
+    reviewer: "",
+    comment: "",
   });
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
@@ -74,6 +75,7 @@ export function DataRequestForm(dataId: any) {
         requestor: "Ryan",
         dataowner: "Bob",
         reviewer: "",
+        comment: "",
       });
       toast({
         title: "Request submitted",
