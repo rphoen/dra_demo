@@ -1,6 +1,5 @@
 "use client";
-
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Command,
   CommandDialog,
@@ -14,27 +13,34 @@ import { Button } from "./ui/button";
 import { CommandLoading } from "cmdk";
 import { useRouter } from "next/navigation";
 
-interface TableData {
-  data: {
-    name: string;
-    owner: string;
-    table_id:string;
-  };
+interface Catalog {
+  id: string;
+  name: string;
+  owner: string;
+}
+
+interface Data {
+  catalogs: Catalog[];
 }
 
 export function CommandMenu() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState([]);
-  const [catalog, setCatalog] = useState<TableData | null>(null);
+  const [data, setData] = useState<any[]>([]); // Assuming the shape of the data is unknown
+  const [catalogs, setCatalogs] = useState<Catalog[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getCatalog = async () => {
       try {
         const response = await fetch(`/api/databricks`);
-        const catalog = await response.json();
-        setCatalog(catalog);
+        const { data }: { data: Data } = await response.json();
+        const filteredCatalogs = data.catalogs.map(({ id, name, owner }) => ({
+          id,
+          name,
+          owner,
+        }));
+        setCatalogs(filteredCatalogs);
       } catch (error) {
         console.error("Error searching data assets:", error);
       }
@@ -47,6 +53,7 @@ export function CommandMenu() {
       setData(data);
       setLoading(false);
     }
+
     getCatalog();
     getData();
   }, []);
@@ -54,17 +61,6 @@ export function CommandMenu() {
   const handleOpenCommandDialog = () => {
     setOpen(true);
   };
-
-  const filterData = () => {
-    if (!catalog || !catalog.data) {
-      return null;
-    }
-
-    const { name, owner, table_id } = catalog.data;
-    return { name, owner, table_id };
-  };
-
-  const filteredData = filterData();
 
   return (
     <div>
@@ -75,22 +71,21 @@ export function CommandMenu() {
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Results">
             {loading && <CommandLoading>Fetching data...</CommandLoading>}
-            {filteredData && (
+            {catalogs.map((cat) => (
               <CommandItem
-                key={filteredData.table_id}
-                // value={filteredData}
+                key={cat.name}
                 onSelect={() => {
-                  router.push(`/dashboard/requests/form/${filteredData.table_id}`);
+                  router.push(`/dashboard/requests/form/${cat.name}`);
                 }}
                 style={{ cursor: "pointer" }}
               >
                 <div className="flex flex-1 justify-between">
-                  <p> {filteredData.name} </p>
-                  <p> Owner: {filteredData.owner}</p>
+                  <p>{cat.name}</p>
+                  <p>Owner: {cat.owner}</p>
                 </div>
               </CommandItem>
-            )}
-            {data.map((item: any) => {
+            ))}
+            {/* {data.map((item: any) => {
               return (
                 <CommandItem
                   key={item.id}
@@ -101,12 +96,12 @@ export function CommandMenu() {
                   style={{ cursor: "pointer" }}
                 >
                   <div className="flex flex-1 justify-between">
-                    <p> {item.data} </p>
-                    <p> Owner: {item.owner}</p>
+                    <p>{item.data}</p>
+                    <p>Owner: {item.owner}</p>
                   </div>
                 </CommandItem>
               );
-            })}
+            })} */}
           </CommandGroup>
         </CommandList>
       </CommandDialog>
