@@ -67,19 +67,6 @@
     "requestor": "Ryan",
     "dataowner": "Bob",
     "reviewer": "",
-    "comment": ""
-  },
-  {
-    "id": "6",
-    "dataid": "9b849787-e6ae-4359-81eb-fb7882616ca0",
-    "request": "a",
-    "intention": "databricks",
-    "duration": "please",
-    "datacontrol": "Masked",
-    "status": "Accepted",
-    "requestor": "Ryan",
-    "dataowner": "Bob",
-    "reviewer": "Alex",
-    "comment": "ok\n"
+    "comment": "recommended"
   }
 ]

@@ -73,9 +73,9 @@ export function CommandMenu() {
             {loading && <CommandLoading>Fetching data...</CommandLoading>}
             {catalogs.map((cat) => (
               <CommandItem
-                key={cat.name}
+                key={cat.id}
                 onSelect={() => {
-                  router.push(`/dashboard/requests/form/${cat.name}`);
+                  router.push(`/dashboard/requests/form/${cat.id}`);
                 }}
                 style={{ cursor: "pointer" }}
               >
