@@ -30,7 +30,7 @@ interface UpdateRequest {
   status: string;
 }
 
-export function DataRequestGrant(requestId: any) {
+export function DataRequestRecommend(requestId: any) {
   const {toast } = useToast();
   const router = useRouter();
   const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
@@ -54,7 +54,7 @@ export function DataRequestGrant(requestId: any) {
       request: formData.request,
       duration: formData.duration,
       datacontrol: formData.datacontrol,
-      status: "Accepted",
+      status: "Recommended",
     };
 
     const response = await fetch(`/api/requests/${requestId.requestId}`, {
@@ -69,8 +69,7 @@ export function DataRequestGrant(requestId: any) {
     if (response.ok) {
       setIsSubmitted(true);
       toast({
-        title: "Request granted",
-        description: "Data request has been granted successfully",
+        description: "Data request recommended",
       })
     } else {
       return console.error("Failed to save data request");
@@ -79,7 +78,7 @@ export function DataRequestGrant(requestId: any) {
   }
 
   return (
-    <Card className="w-[400px]">
+    <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Grant Data Request</CardTitle>
       </CardHeader>

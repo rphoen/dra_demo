@@ -31,8 +31,6 @@ export function DataRequestReview(requestId: any) {
       comment: formData.comment,
     };
 
-    console.log(requestData);
-
     const response = await fetch(`/api/requests/${requestId.requestId}`, {
       method: "PATCH",
       headers: {
@@ -55,9 +53,9 @@ export function DataRequestReview(requestId: any) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="grid w-full items-center gap-1.5">
-        <Label htmlFor="Comment">Comment</Label>
+        {/* <Label htmlFor="Comment">Comment</Label> */}
         <Textarea
-          placeholder="Type your comment here."
+          placeholder="Type any comments or amendments here..."
           id="comment"
           name="comment"
           value={formData.comment}

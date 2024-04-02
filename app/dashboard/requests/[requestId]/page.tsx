@@ -19,9 +19,9 @@ export default async function DataRequest({ params }: PageProps) {
   return (
     <div>
       <DataRequestInfo requestId={requestId} />
-      <div className="py-5">
+      <div className="px-1 py-5">
         {session?.user.role === "dataowner" ? (
-          <Tabs defaultValue="accept" className="w-[350px]">
+          <Tabs defaultValue="accept" className="w-[400px]">
             <TabsList className="grid w-full grid-cols-2 mb-1">
               <TabsTrigger value="accept">Accept</TabsTrigger>
               <TabsTrigger value="reject">Reject</TabsTrigger>
@@ -37,8 +37,21 @@ export default async function DataRequest({ params }: PageProps) {
           <div></div>
         )}
         {session?.user.role === "reviewer" ? (
-          <DataRequestReview requestId={requestId} />
-        ) : <div></div>}
+          <Tabs defaultValue="recommend" className="w-[400px]">
+            <TabsList className="grid w-full grid-cols-2 mb-1">
+              <TabsTrigger value="recommend">Recommend</TabsTrigger>
+              <TabsTrigger value="reject">Reject</TabsTrigger>
+            </TabsList>
+            <TabsContent value="recommend">
+              <DataRequestReview requestId={requestId} />
+            </TabsContent>
+            <TabsContent value="reject">
+              <DataRequestDeny requestId={requestId} />
+            </TabsContent>
+          </Tabs>
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );

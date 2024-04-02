@@ -62,10 +62,9 @@ export function DataRequestDeny(requestId: any) {
   }
 
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[400px]">
       <CardHeader>
         <CardTitle>Deny Data Request</CardTitle>
-        <CardDescription>Choose the data to request</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit}>
@@ -86,7 +85,7 @@ export function DataRequestDeny(requestId: any) {
               <Button disabled>Submitted</Button>
             ) : (
               <Button type="submit" variant="destructive">
-                Deny Access
+                Reject
               </Button>
             )}
           </div>

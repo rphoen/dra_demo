@@ -26,19 +26,29 @@ export default function DataRequestInfo(requestId: any) {
         text="View data request details."
       />
       {data && (
-        <div className="px-2 py-10">
+        <div className="px-2 py-5">
+          <p className="scroll-m-20 font-semibold pb-2">
+            Status: {data.status}
+          </p>
           <div className="grid w-full grid-cols-2">
             <p className="leading-7">Data Access Mode: {data.request}</p>
-            <p className="leading-7">Intention: {data.intention}</p>
-            <p className="leading-7">Duration: {data.duration}</p>
-            <p className="leading-7">Data Control: {data.datacontrol}</p>
-            <p className="leading-7">Status: {data.status}</p>
-            <p className="leading-7">Reason for rejection: {data.reason}</p>
             <p className="leading-7">Requestor name: {data.requestor}</p>
+            <p className="leading-7">Intention: {data.intention}</p>
             <p className="leading-7">Data owner: {data.dataowner}</p>
+            <p className="leading-7">Duration: {data.duration}</p>
             <p className="leading-7">Reviewer: {data.reviewer}</p>
-            <p className="leading-7">Comment: {data.comment}</p>
+            <p className="leading-7">Data Control: {data.datacontrol}</p>
           </div>
+        </div>
+      )}
+      {data?.reason && (
+        <div className="px-2 py-5">
+          <p className="leading-7">Reason for rejection: {data.reason}</p>
+        </div>
+      )}
+      {data?.comment && (
+        <div className="px-2 py-2">
+          <p className="leading-7">Comment: {data.comment}</p>
         </div>
       )}
     </div>
