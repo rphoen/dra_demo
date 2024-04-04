@@ -31,21 +31,6 @@ export function CommandMenu() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const getCatalog = async () => {
-      try {
-        const response = await fetch(`/api/databricks`);
-        const { data }: { data: Data } = await response.json();
-        const filteredCatalogs = data.catalogs.map(({ id, name, owner }) => ({
-          id,
-          name,
-          owner,
-        }));
-        setCatalogs(filteredCatalogs);
-      } catch (error) {
-        console.error("Error searching data assets:", error);
-      }
-    };
-
     async function getData() {
       setLoading(true);
       const res = await fetch(`/api/sampledata`);
@@ -54,7 +39,6 @@ export function CommandMenu() {
       setLoading(false);
     }
 
-    getCatalog();
     getData();
   }, []);
 
@@ -71,21 +55,7 @@ export function CommandMenu() {
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Results">
             {loading && <CommandLoading>Fetching data...</CommandLoading>}
-            {catalogs.map((cat) => (
-              <CommandItem
-                key={cat.id}
-                onSelect={() => {
-                  router.push(`/dashboard/requests/form/${cat.id}`);
-                }}
-                style={{ cursor: "pointer" }}
-              >
-                <div className="flex flex-1 justify-between">
-                  <p>{cat.name}</p>
-                  <p>Owner: {cat.owner}</p>
-                </div>
-              </CommandItem>
-            ))}
-            {/* {data.map((item: any) => {
+            {data.map((item: any) => {
               return (
                 <CommandItem
                   key={item.id}
@@ -101,7 +71,7 @@ export function CommandMenu() {
                   </div>
                 </CommandItem>
               );
-            })} */}
+            })}
           </CommandGroup>
         </CommandList>
       </CommandDialog>
