@@ -10,7 +10,6 @@ import { Icons } from "@/components/icons";
 import { MainNavItem } from "@/types";
 import { MobileNav } from "./mobile-nav";
 import Image from "next/image";
-import AttIcon from "../public/attlogo.jpg";
 
 interface MainNavProps {
   items?: MainNavItem[];
@@ -25,7 +24,7 @@ export function MainNav({ items, children }: MainNavProps) {
     <div>
       <div className="flex gap-6 md:gap-10">
         <Link href="/" className="hidden items-center space-x-2 md:flex">
-          <Image src={AttIcon} alt="Logo" width={28} height={28} />
+          <Icons.logo/>
           <span className="hidden font-bold sm:inline-block">
             {siteConfig.name}
           </span>

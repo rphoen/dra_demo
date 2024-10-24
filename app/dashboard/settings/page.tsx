@@ -5,7 +5,7 @@ const page = () => {
   return (
     <div>
       Settings
-      <Catalog />
+      {/* <Catalog /> */}
     </div>
   )
 }
