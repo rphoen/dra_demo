@@ -68,5 +68,17 @@
     "dataowner": "Bob",
     "reviewer": "",
     "comment": "recommended"
+  },
+  {
+    "id": "6",
+    "dataid": "1",
+    "request": "test3",
+    "intention": "Access API",
+    "duration": "3 days",
+    "datacontrol": "Masked",
+    "status": "Pending",
+    "requestor": "Ryan",
+    "dataowner": "Bob",
+    "reviewer": "admin"
   }
 ]
