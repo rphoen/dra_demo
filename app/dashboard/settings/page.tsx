@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import React from "react";
 
-export default function setingsPage() {
+export default function SetingsPage() {
   const [notificationsEnabled, setNotificationsEnabled] =
     useState<boolean>(true);
   const [theme, setTheme] = useState<"light" | "dark">("light");
